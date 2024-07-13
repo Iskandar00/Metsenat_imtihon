@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<body>
+<form method="post">
+    {% csrf_token %}
+    {{ form.errors }}
+    <h1>{{student_or_sponsor_create}}</h1>
+    {{ form.as_p }}
+    <a href="{% url 'home_page' %}"><input type="button" value="Back"></a>
+    <button type="submit">Submit</button>
+</form>
+
+<p></p>
+<form method="get">
+    {% for field in filter.form %}
+        <label for="{{ field.id_for_label }}">{{ field.name }}</label>
+        <select name="{{ field.name }}" id="{{ field.id_for_label }}">
+            {% for value, label in field.field.choices %}
+                <option value="{{ value }}">{{ label }}</option>
+            {% endfor %}
+        </select>
+    {% endfor %}
+    <p></p>
+    <div class="col-12 form-group mg-t-8">
+        <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">SEARCH</button>
+    </div>
+    <p></p>
+</form>
+<p></p>
+
+
+{% for user in users %}
+<br>
+<a href="?user_id={{user.id}}">
+    <button>{{ user.full_name }}</button>
+</a>
+{% endfor %}
+<h3> id: {{user_detail.id}}</h3>
+<h3> full_name: {{user_detail.full_name}}</h3>
+<h3> phone_number: {{user_detail.phone_number}}</h3>
+<h3> place_of_study: {{user_detail.place_of_study}}</h3>
+<h3> level: {{user_detail.level}}</h3>
+<h3> contract: {{user_detail.contract}}</h3>
+<h3> sponsored_amount: {{user_detail.sponsored_amount}}</h3>
+<h3> created_at: {{user_detail.created_at}}</h3>
+
+
+{% if user_detail.id %}
+<a href="{% url 'student_delete' user_detail.id %}"><i></i><button>Delete</button></a>
+{% endif %}
+
+{% if user_detail.id %}
+<a href="{% url 'student_update' user_detail.id %}"><button>Edit</button></a>
+{% endif %}
+
+</body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+</html>

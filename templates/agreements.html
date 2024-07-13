@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+    {{ form.errors }}
+    <h1>{{student_or_sponsor_create}}</h1>
+    {{ form.as_p }}
+    <a href="{% url 'home_page' %}"><input type="button" value="Back"></a>
+    <button type="submit">Submit</button>
+</form>
+
+{% for user in users %}
+<br>
+<a href="?user_id={{user.id}}">
+    <button>{{ user.sponsor }}-{{ user.student }}</button>
+</a>
+{% endfor %}
+
+<h3> sponsor:  {{user_detail.sponsor}}</h3>
+<h3> student:  {{user_detail.student}}</h3>
+<h3> amount:  {{user_detail.amount}}</h3>
+<br>
+
+{% if user_detail.id %}
+<a href="{% url 'agreements_delete' user_detail.id %}"><button>Delete</button></a>
+{% endif %}
+
+{% if user_detail.id %}
+<a href="{% url 'agreements_update' user_detail.id %}"><button>Edit</button></a>
+{% endif %}
+</body>
+</html>

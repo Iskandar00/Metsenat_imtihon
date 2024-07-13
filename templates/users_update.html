@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div style="color: red">{{ field.errors }}</div>
+    <div>
+        <a href="{% url 'home_page' %}"><input type="button" value="Back"></a>
+        <button type="submit">Save</button>
+        <button type="reset">Reset</button>
+    </div>
+</form>
+</body>
+</html>

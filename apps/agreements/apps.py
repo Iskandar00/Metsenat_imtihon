@@ -1,0 +1,9 @@
+from django.apps import AppConfig
+
+
+class AgreementsConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'apps.agreements'
+
+    def ready(self):
+        import apps.agreements.signals
